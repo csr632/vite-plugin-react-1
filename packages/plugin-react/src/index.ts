@@ -175,6 +175,9 @@ export default function viteReact(opts: Options = {}): PluginOption[] {
           (opts.jsxRuntime === 'classic'
             ? importReactRE.test(code)
             : code.includes(devRuntime)))
+      // the App.js is not transformed by esbuild yet (esbuild is run after this plugin)
+      // so the `code` doesn't include the "devRuntime"
+      // debugger;
       if (useFastRefresh) {
         plugins.push([
           await loadPlugin('react-refresh/babel'),
